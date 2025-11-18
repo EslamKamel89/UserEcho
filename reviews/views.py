@@ -3,5 +3,5 @@ from django.shortcuts import render  # type: ignore
 
 # Create your views here.
 
-def test(request:HttpRequest)->JsonResponse:
-    return JsonResponse({'message':"👋 welcome"})
+def home(request:HttpRequest)->HttpResponse:
+    return render(request , 'reviews/index.html')
