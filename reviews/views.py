@@ -12,6 +12,7 @@ def home(request:HttpRequest)->HttpResponse:
     if request.method == 'POST' :
         form = ReviewForm(request.POST)
         if form.is_valid() :
+            print(form.cleaned_data)
             user_name:Optional[str] = form.cleaned_data['user_name']
             path = reverse('thank-you')
             return HttpResponseRedirect(f"{path}?username={user_name}")

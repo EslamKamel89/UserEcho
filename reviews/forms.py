@@ -21,8 +21,6 @@ class ReviewForm(forms.Form):
                 "placeholder" : "Comment"
             }
         ) , validators=[MinLengthValidator(10) , MaxLengthValidator(255)] , required=False)
-    rating = forms.IntegerField(min_value=1 , max_value=5 ,widget=forms.NumberInput(
-         attrs= {
+    rating = forms.IntegerField(min_value=1 , max_value=5 ,widget=forms.NumberInput(attrs= {
                 "class":"bg-gray-50 border rounded-lg text-heading text-sm focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body" ,
-            },
-    ))
+            }))
