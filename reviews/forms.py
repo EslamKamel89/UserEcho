@@ -1,5 +1,5 @@
 from django import forms
-from django.core.validators import MinLengthValidator
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 
 
 class ReviewForm(forms.Form):
@@ -8,7 +8,7 @@ class ReviewForm(forms.Form):
            attrs= {
                 "class":"bg-gray-50 border rounded-lg text-heading text-sm focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body" ,
                 "placeholder" : "Enter your name"
-            }
+            },
         ) ,
         max_length=100 , min_length=5 , label='Name' , error_messages={
         "required":"Your name must not be empty" ,
@@ -20,4 +20,9 @@ class ReviewForm(forms.Form):
                 "class":"bg-gray-50 border rounded-lg text-heading text-sm focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body" ,
                 "placeholder" : "Comment"
             }
-        ) , validators=[MinLengthValidator(10)] , required=False)
+        ) , validators=[MinLengthValidator(10) , MaxLengthValidator(255)] , required=False)
+    rating = forms.IntegerField(min_value=1 , max_value=5 ,widget=forms.NumberInput(
+         attrs= {
+                "class":"bg-gray-50 border rounded-lg text-heading text-sm focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body" ,
+            },
+    ))
