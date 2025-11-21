@@ -3,7 +3,9 @@ from typing import Optional
 from django.http import (HttpRequest, HttpResponse,  # type: ignore
                          HttpResponseRedirect, JsonResponse)
 from django.shortcuts import render
-from django.urls import reverse  # type: ignore
+from django.urls import reverse
+
+from reviews.models import Review  # type: ignore
 
 from .forms import ReviewForm
 
@@ -12,7 +14,8 @@ def home(request:HttpRequest)->HttpResponse:
     if request.method == 'POST' :
         form = ReviewForm(request.POST)
         if form.is_valid() :
-            print(form.cleaned_data)
+            review = Review(**form.cleaned_data)
+            review.save()
             user_name:Optional[str] = form.cleaned_data['user_name']
             path = reverse('thank-you')
             return HttpResponseRedirect(f"{path}?username={user_name}")

@@ -15,7 +15,7 @@ class ReviewForm(forms.Form):
         "max_length" : "Please enter a shorter name!" ,
         "min_length" :"please enter a longer name!"
     })
-    comment = forms.CharField(widget=forms.Textarea(
+    content = forms.CharField(widget=forms.Textarea(
          attrs= {
                 "class":"bg-gray-50 border rounded-lg text-heading text-sm focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body" ,
                 "placeholder" : "Comment"
