@@ -5,6 +5,7 @@ from django.http import (HttpRequest, HttpResponse,  # type: ignore
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
+from django.views.generic.base import TemplateView
 
 from reviews.models import Review  # type: ignore
 
@@ -25,18 +26,6 @@ class ReviewView(View):
             return HttpResponseRedirect(f"{path}?username={user_name}")
         return render(request  , 'reviews/index.html' , {'form':form})
 
-# def home(request:HttpRequest)->HttpResponse:
-#     if request.method == 'POST' :
-#         form = ReviewForm(request.POST)
-#         if form.is_valid() :
-#             form.save()
-#             user_name:Optional[str] = form.cleaned_data['user_name']
-#             path = reverse('thank-you')
-#             return HttpResponseRedirect(f"{path}?username={user_name}")
-#     else:
-#         form = ReviewForm()
-#     return render(request , 'reviews/index.html' , {"form" : form})
 
-def thank_you(request:HttpRequest)->HttpResponse :
-    username:Optional[str] = request.GET.get('username' , 'Guest')
-    return render(request , 'reviews/thank-you.html' , {'username' :username})
+class ThankYouView(TemplateView):
+    template_name = 'reviews/thank-you.html'
