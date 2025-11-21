@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Any, Optional
 
 from django.http import (HttpRequest, HttpResponse,  # type: ignore
                          HttpResponseRedirect, JsonResponse)
@@ -29,3 +29,7 @@ class ReviewView(View):
 
 class ThankYouView(TemplateView):
     template_name = 'reviews/thank-you.html'
+    def get_context_data(self , **kwargs:Any)->dict[str, Any]:
+        context =  super().get_context_data(**kwargs)
+        context['message'] = 'Thank you for submitting you review'
+        return context
