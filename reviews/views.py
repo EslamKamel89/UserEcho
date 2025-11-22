@@ -38,6 +38,12 @@ class ThankYouView(TemplateView):
 class ReviewsListView(ListView) :
     template_name = 'reviews/review-list.html'
     model = Review
+    context_object_name = 'reviews'
+    def get_queryset(self):
+        query =  super().get_queryset()
+        query = query.filter(rating__gt=0)
+        return query
+
 
 
 class SingleReviewView(TemplateView):
