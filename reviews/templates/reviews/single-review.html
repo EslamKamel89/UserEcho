@@ -1,4 +1,22 @@
 <!--prettier-ignore-->
 {% extends 'base.html' %}
 {% block title %} Review {% endblock %}
-{% block content %} Review {% endblock %}
+{% block content %}
+<div class="max-w-5xl mt-5 mx-auto px-4 py-10">
+  <div class="p-6 rounded-2xl shadow-sm border border-gray-200 bg-white">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-xl font-semibold text-gray-900">
+        {{ review.user_name }}
+      </h2>
+
+      <span
+        class="text-sm px-2 py-1 rounded-lg bg-yellow-100 text-yellow-700 font-medium"
+      >
+        ⭐ {{ review.rating }}
+      </span>
+    </div>
+
+    <p class="text-gray-700 leading-relaxed text-base">{{ review.content }}</p>
+  </div>
+</div>
+{% endblock %}
