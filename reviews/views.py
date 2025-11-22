@@ -35,12 +35,10 @@ class ThankYouView(TemplateView):
         context['message'] = 'Thank you for submitting you review'
         return context
 
-class ReviewsListView(TemplateView) :
+class ReviewsListView(ListView) :
     template_name = 'reviews/review-list.html'
-    def get_context_data(self , **kwargs:Any)->dict[str , Any]:
-        context = super().get_context_data(**kwargs)
-        context['reviews'] = Review.objects.all()
-        return context
+    model = Review
+
 
 class SingleReviewView(TemplateView):
     template_name = "reviews/single-review.html"
