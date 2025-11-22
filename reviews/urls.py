@@ -5,5 +5,7 @@ from . import views
 
 urlpatterns:list[URLPattern] = [
     path('' , views.ReviewView.as_view() ),
-    path('thank-you' , views.ThankYouView.as_view() , name='thank-you')
+    path('thank-you' , views.ThankYouView.as_view() , name='thank-you'),
+    path('reviews' , views.ReviewsListView.as_view()),
+    path('reviews/<int:id>' , views.SingleReviewView.as_view())
 ]

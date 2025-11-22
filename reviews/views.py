@@ -5,6 +5,7 @@ from django.http import (HttpRequest, HttpResponse,  # type: ignore
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
+from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 
 from reviews.models import Review  # type: ignore
@@ -33,3 +34,15 @@ class ThankYouView(TemplateView):
         context =  super().get_context_data(**kwargs)
         context['message'] = 'Thank you for submitting you review'
         return context
+
+class ReviewsListView(TemplateView) :
+    template_name = 'reviews/review-list.html'
+    def get_context_data(self , **kwargs:Any)->dict[str , Any]:
+        context = super().get_context_data(**kwargs)
+        context['reviews'] = Review.objects.all()
+        return context
+
+class SingleReviewView(View):
+    def get(self , request:HttpRequest , id:int):
+        review = Review.objects.get(pk=id)
+        return render(request , 'reviews/single-review.html' , {'review':review})
