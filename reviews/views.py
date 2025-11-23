@@ -1,11 +1,11 @@
 from typing import Any, Optional
 
 from django.http import (HttpRequest, HttpResponse,  # type: ignore
-                         HttpResponseRedirect, JsonResponse)
+                         HttpResponseRedirect)
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
 
 from reviews.models import Review  # type: ignore
@@ -46,10 +46,7 @@ class ReviewsListView(ListView) :
 
 
 
-class SingleReviewView(TemplateView):
+class SingleReviewView(DetailView):
     template_name = "reviews/single-review.html"
-    def get_context_data(self ,**kwargs:Any)->dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        review = get_object_or_404(Review ,id= kwargs['id'])
-        context['review'] = review
-        return context
+    model = Review
+
