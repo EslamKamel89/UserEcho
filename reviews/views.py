@@ -1,35 +1,21 @@
-from typing import Any, Optional
+from typing import Any
 
-from django.http import HttpRequest, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
-from django.views import View
+from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView
 
 from reviews.models import Review  # type: ignore
 
 from .forms import ReviewForm
 
 
-class ReviewView(FormView):
+class ReviewView(CreateView):
     form_class = ReviewForm
+    model = Review
     template_name = 'reviews/index.html'
     success_url = 'thank-you'
 
-    # def get(self , request:HttpRequest):
-    #     form = ReviewForm()
-    #     return render(request , 'reviews/index.html' , {'form' :form})
-
-    # def post(self , request:HttpRequest):
-    #     form = ReviewForm(request.POST)
-    #     if form.is_valid() :
-    #         form.save()
-    #         user_name:Optional[str] = form.cleaned_data['user_name']
-    #         path = reverse('thank-you')
-    #         return HttpResponseRedirect(f"{path}?username={user_name}")
-    #     return render(request  , 'reviews/index.html' , {'form':form})
 
 
 class ThankYouView(TemplateView):
