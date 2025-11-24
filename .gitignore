@@ -1,3 +1,14 @@
 .env
 *.sqlite3
 flowbite.min.css
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+*.avif
+*.bmp
+*.tiff
+*.tif
+*.ico
