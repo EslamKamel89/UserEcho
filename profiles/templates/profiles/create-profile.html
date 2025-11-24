@@ -11,10 +11,10 @@
   <form
     method="POST"
     enctype="multipart/form-data"
-    action="/profiles"
+    action="/profiles/"
     class="space-y-6 bg-white p-8 rounded-2xl shadow-sm border border-gray-200"
   >
-    <!-- File Input -->
+    {% csrf_token %}
     <div class="flex flex-col space-y-2">
       <div>
         <label class="block text-gray-700 font-medium mb-2">Username</label>
@@ -30,9 +30,8 @@
       >
       <input
         type="file"
-        name="files[]"
+        name="image"
         required
-        multiple
         class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer"
       />
     </div>
