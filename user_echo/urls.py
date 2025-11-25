@@ -23,4 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('' , include('reviews.urls')) ,
     path('profiles/' , include('profiles.urls'))
-] + static(prefix=settings.MEDIA_URL , document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG :
+    urlpatterns += static(prefix=settings.MEDIA_URL , document_root=settings.MEDIA_ROOT)
