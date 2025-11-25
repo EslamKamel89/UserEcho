@@ -1,7 +1,5 @@
 from django.core.files.uploadedfile import UploadedFile
-from django.http import HttpRequest, HttpResponseRedirect
-from django.shortcuts import render
-from django.views import View
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 
 from profiles.forms import ProfileForm
@@ -21,17 +19,7 @@ class CreateProfileView(CreateView):
     template_name = 'profiles/create-profile.html'
 
 
-# class CreateProfileView(View):
-#     def get(self,request:HttpRequest):
-#         form = ProfileForm()
-#         return render(request, 'profiles/create-profile.html' , {"form":form})
-#     def post(self , request:HttpRequest) :
-#         form = ProfileForm(request.POST , request.FILES)
-#         file = request.FILES.get('user_image')
-#         if form.is_valid() and file:
-#             # store_file(file)
-#             profile = UserProfile(image=file)
-#             profile.save()
-#             return HttpResponseRedirect('/profiles' ,)
-#         return render(request, 'profiles/create-profile.html' , {"form":form})
-
+class ProfilesView(ListView):
+    template_name="profiles/user-profiles.html"
+    model=UserProfile
+    context_object_name = "profiles"
