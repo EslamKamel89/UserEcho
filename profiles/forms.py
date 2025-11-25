@@ -2,15 +2,15 @@ from django import forms
 
 
 class ProfileForm(forms.Form):
-    username = forms.CharField(
-        required=True,
-        widget=forms.TextInput(
-            attrs={"class":"bg-gray-50 border rounded-lg text-heading text-sm focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"}
-            ),
-        error_messages={
-            "required":"Your name must not be empty" ,
-            }
-        )
+    # username = forms.CharField(
+    #     required=True,
+    #     widget=forms.TextInput(
+    #         attrs={"class":"bg-gray-50 border rounded-lg text-heading text-sm focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"}
+    #         ),
+    #     error_messages={
+    #         "required":"Your name must not be empty" ,
+    #         }
+    #     )
     user_image = forms.ImageField(
         required=True ,
         widget= forms.FileInput(
