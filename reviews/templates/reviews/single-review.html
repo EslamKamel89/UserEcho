@@ -3,27 +3,44 @@
 {% block title %} Review {% endblock %}
 {% block content %}
 <div class="max-w-5xl mt-5 mx-auto px-4 py-10">
-  <div class="p-6 rounded-2xl shadow-sm border border-gray-200 bg-white">
-    <div class="flex items-center justify-between mb-3">
-      <div class="flex space-x-2 items-center">
-        <h2 class="text-xl font-semibold text-gray-900">
-          {{ review.user_name }}
-        </h2>
-        <form action="/reviews/favorite">
+  <div
+    class="p-8 rounded-2xl shadow-md border border-gray-200 bg-white transition"
+  >
+    <div class="flex items-start justify-between mb-5">
+      <div class="flex items-center space-x-3">
+        <h2 class="text-2xl font-bold text-gray-900">{{ review.user_name }}</h2>
+
+        {% if is_favorite %}
+        <span
+          class="flex items-center text-red-500 text-sm font-medium bg-red-50 px-3 py-1 rounded-xl"
+        >
+          <i class="bi bi-heart-fill mr-1"></i>
+          You love this review
+        </span>
+        {% else %}
+        <form action="/reviews/favorite" method="POST" class="inline-block">
+          {% csrf_token %}
           <input type="hidden" name="review_id" value="{{ review.id }}" />
-          <button>
-            <i class="bi bi-balloon-heart-fill text-red-500 text-2xl"></i>
+          <button
+            class="p-2 rounded-full hover:bg-red-50 active:bg-red-100 transition"
+            title="Add to favorites"
+          >
+            <i class="bi bi-balloon-heart text-red-500 text-2xl"></i>
           </button>
         </form>
+        {% endif %}
       </div>
+
       <span
-        class="text-sm px-2 py-1 rounded-lg bg-yellow-100 text-yellow-700 font-medium"
+        class="text-sm px-3 py-1 rounded-xl bg-yellow-100 text-yellow-700 font-semibold flex items-center"
       >
         ⭐ {{ review.rating }}
       </span>
     </div>
 
-    <p class="text-gray-700 leading-relaxed text-base">{{ review.content }}</p>
+    <p class="text-gray-700 leading-relaxed text-base whitespace-pre-line">
+      {{ review.content }}
+    </p>
   </div>
 </div>
 {% endblock %}

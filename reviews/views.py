@@ -1,6 +1,6 @@
-from typing import Any
+from typing import Any, cast
 
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponseRedirect
 from django.views import View
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
@@ -40,9 +40,17 @@ class ReviewsListView(ListView) :
 class SingleReviewView(DetailView):
     template_name = "reviews/single-review.html"
     model = Review
+    def get_context_data(self, **kwargs:Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        loaded_review:Review = cast(Review ,self.get_object())
+        request = self.request
+        context["is_favorite"] = loaded_review.id == request.session['favorite_review']
+        return context
+
 
 class AddFavoriteView(View):
     def post(self , request:HttpRequest):
         review_id = int(request.POST.get('review_id' , '0'))
-        fav_review = Review.objects.get(pk=review_id)
+        request.session['favorite_review'] = review_id
+        return HttpResponseRedirect(f'/reviews/{review_id}')
 
