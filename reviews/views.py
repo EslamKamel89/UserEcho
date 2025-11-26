@@ -1,6 +1,7 @@
 from typing import Any
 
-from django.http import HttpResponse
+from django.http import HttpRequest
+from django.views import View
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
@@ -39,4 +40,9 @@ class ReviewsListView(ListView) :
 class SingleReviewView(DetailView):
     template_name = "reviews/single-review.html"
     model = Review
+
+class AddFavoriteView(View):
+    def post(self , request:HttpRequest):
+        review_id = int(request.POST.get('review_id' , '0'))
+        fav_review = Review.objects.get(pk=review_id)
 

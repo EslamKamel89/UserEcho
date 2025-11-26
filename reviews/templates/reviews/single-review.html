@@ -9,9 +9,12 @@
         <h2 class="text-xl font-semibold text-gray-900">
           {{ review.user_name }}
         </h2>
-        <button>
-          <i class="bi bi-balloon-heart-fill text-red-500 text-2xl"></i>
-        </button>
+        <form action="/reviews/favorite">
+          <input type="hidden" name="review_id" value="{{ review.id }}" />
+          <button>
+            <i class="bi bi-balloon-heart-fill text-red-500 text-2xl"></i>
+          </button>
+        </form>
       </div>
       <span
         class="text-sm px-2 py-1 rounded-lg bg-yellow-100 text-yellow-700 font-medium"
