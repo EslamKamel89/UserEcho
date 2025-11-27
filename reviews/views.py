@@ -44,7 +44,7 @@ class SingleReviewView(DetailView):
         context = super().get_context_data(**kwargs)
         loaded_review:Review = cast(Review ,self.get_object())
         request = self.request
-        context["is_favorite"] = loaded_review.id == request.session['favorite_review']
+        context["is_favorite"] = loaded_review.id == request.session['favorite_review'] # type: ignore
         return context
 
 
